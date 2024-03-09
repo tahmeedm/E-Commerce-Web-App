@@ -69,5 +69,74 @@
     <footer class="footer">
         <p>&copy; 2024 Companyco. All rights reserved.</p>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          const cart = {};
+          const cartSection = document.createElement('section');
+          cartSection.classList.add('cart-display');
+          cartSection.style.textAlign = 'center'; 
+          const cartTitle = document.createElement('h2');
+          cartTitle.textContent = 'Shopping Cart';
+          cartTitle.style.textAlign = 'center'; 
+          cartSection.appendChild(cartTitle);
+          document.body.insertBefore(cartSection, document.querySelector('.footer'));
+        
+          function updateCartDisplay() {
+            cartSection.innerHTML = '<h2 style="text-align: center;">Shopping Cart</h2>'; 
+            for (const [productName, productDetails] of Object.entries(cart)) {
+              const productDiv = document.createElement('div');
+              productDiv.classList.add('cart-item');
+              productDiv.style.textAlign = 'center'; 
+              productDiv.innerHTML = `
+                <span>${productName}</span>
+                <span>${productDetails.price}</span>
+                <span>Quantity: ${productDetails.quantity}</span>
+                <button class="remove-btn shop-now-btn">Remove</button> <!-- Applying the .shop-now-btn class -->
+              `;
+              cartSection.appendChild(productDiv);
+        
+              const removeBtn = productDiv.querySelector('.remove-btn');
+              removeBtn.addEventListener('mouseover', () => {
+                removeBtn.style.backgroundColor = '#ff0000';
+              });
+        
+              removeBtn.addEventListener('mouseout', () => {
+                removeBtn.style.backgroundColor = ''; 
+              });
+        
+              removeBtn.addEventListener('click', () => {
+                if (cart[productName].quantity > 1) {
+                  cart[productName].quantity -= 1;
+                } else {
+                  delete cart[productName];
+                }
+                updateCartDisplay();
+              });
+            }
+          }
+        
+          document.querySelectorAll('.product').forEach(product => {
+            const productName = product.querySelector('h2').textContent;
+            const productPrice = product.querySelector('.price').textContent;
+            const addButton = product.querySelector('button');
+            addButton.classList.add('shop-now-btn'); 
+        
+            addButton.addEventListener('click', () => {
+              if (cart[productName]) {
+                cart[productName].quantity += 1;
+              } else {
+                cart[productName] = {
+                  price: productPrice,
+                  quantity: 1
+                };
+              }
+              alert(`${productName} has been added to the cart.`);
+              updateCartDisplay();
+            });
+          });
+        });
+        </script>
+        
+        
 </body>
 </html>
