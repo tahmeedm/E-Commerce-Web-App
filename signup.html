@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Signup - CompanyCo</title>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <img src="logo.png" alt="Company Logo">
+        </div>
+        <div class="company-name">
+            Company Name
+        </div>
+    </header>
+
+    <!-- Navigation Section -->
+    <nav>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="login.html" class="nav-link">Login</a> 
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <section class="signup-form">
+            <form id="signupForm" novalidate>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required placeholder="Enter your username" pattern="^[A-Za-z][A-Za-z0-9_-]{2,19}$">
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-\_=+\[\]{}|;:'\",.<?/`~]).{8,}$">
+
+                
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email">
+                
+                <button type="submit" class="signup-btn">Signup</button>
+            </form>
+        </section>
+        <!-- Message Box Below the Form -->
+        <div class="message-box" id="messageBox">
+            <p id="message"></p>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <p>&copy; 2024 Companyco. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript for form validation and interaction -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('signupForm');
+            const messageBox = document.getElementById('messageBox');
+        
+            form.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevent form from submitting normally
+                let isValid = true;
+                let errorMessages = [];
+        
+                // Clear previous messages
+                messageBox.innerHTML = '';
+        
+                // Username validation
+                const username = form['username'].value;
+                if (!username.match(/^[A-Za-z][A-Za-z0-9_-]{2,19}$/)) {
+                    isValid = false;
+                    errorMessages.push('Check the Username.');
+                }
+        
+                // Password validation
+                const password = form['password'].value;
+                if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+\[\]{}|;:'",.<>?/`~]).{8,}$/)) {
+                    isValid = false;
+                    errorMessages.push("Password doesn't match requirements.");
+                }
+        
+                // Confirm password validation
+                const confirmPassword = form['confirmPassword'].value;
+                if (password !== confirmPassword) {
+                    isValid = false;
+                    errorMessages.push("Passwords don't match.");
+                }
+        
+                // Email validation
+                const email = form['email'].value;
+                if (!email.match(/^\S+@\S+\.\S+$/)) {
+                    isValid = false;
+                    errorMessages.push('Check the Email.');
+                }
+        
+                // Show the message box with the messages
+                messageBox.style.display = 'block';
+                errorMessages.forEach(msg => {
+                    const p = document.createElement('p');
+                    p.textContent = msg;
+                    p.classList.add('error-message');
+                    messageBox.appendChild(p);
+                });
+        
+                if (isValid) {
+                    const successMessage = document.createElement('p');
+                    successMessage.textContent = 'Signup successful!';
+                    successMessage.classList.add('success-message');
+                    messageBox.appendChild(successMessage);
+                }
+            });
+        });
+        </script>
+</body>
+</html>
+</html>
