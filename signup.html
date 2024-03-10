@@ -45,7 +45,7 @@
                 <button type="submit" class="signup-btn">Signup</button>
             </form>
         </section>
-        <!-- Message Box Below the Form -->
+        
         <div class="message-box" id="messageBox">
             <p id="message"></p>
         </div>
@@ -56,49 +56,49 @@
         <p>&copy; 2024 Companyco. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript for form validation and interaction -->
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('signupForm');
             const messageBox = document.getElementById('messageBox');
         
             form.addEventListener('submit', (event) => {
-                event.preventDefault(); // Prevent form from submitting normally
+                event.preventDefault(); 
                 let isValid = true;
                 let errorMessages = [];
         
-                // Clear previous messages
+                
                 messageBox.innerHTML = '';
         
-                // Username validation
+                
                 const username = form['username'].value;
                 if (!username.match(/^[A-Za-z][A-Za-z0-9_-]{2,19}$/)) {
                     isValid = false;
                     errorMessages.push('Check the Username.');
                 }
         
-                // Password validation
+                
                 const password = form['password'].value;
                 if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+\[\]{}|;:'",.<>?/`~]).{8,}$/)) {
                     isValid = false;
                     errorMessages.push("Password doesn't match requirements.");
                 }
         
-                // Confirm password validation
+                
                 const confirmPassword = form['confirmPassword'].value;
                 if (password !== confirmPassword) {
                     isValid = false;
                     errorMessages.push("Passwords don't match.");
                 }
         
-                // Email validation
+                
                 const email = form['email'].value;
                 if (!email.match(/^\S+@\S+\.\S+$/)) {
                     isValid = false;
                     errorMessages.push('Check the Email.');
                 }
         
-                // Show the message box with the messages
+                
                 messageBox.style.display = 'block';
                 errorMessages.forEach(msg => {
                     const p = document.createElement('p');

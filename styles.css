@@ -66,11 +66,11 @@ body {
 }
 
 .logo img {
-    max-height: 50px; /* Adjust as needed */
+    max-height: 50px; 
 }
 
 .company-name {
-    color: white; /* Adjust text color for better visibility */
+    color: white; 
 }
 
 /* Navigation Styles */
@@ -142,7 +142,7 @@ main {
     padding: 20px;
     margin: 20px;
     border-radius: 10px;
-    width: 50%; /* Ensure two products per line with spacing */
+    width: 50%; 
     text-align: center;
 }
 /* Product Container Styles */
