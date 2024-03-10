@@ -175,6 +175,7 @@ main {
     border: none;
     border-radius: 5px;
     margin: 10px;
+    opacity: 1.0
 }
 
 .product button:hover {
